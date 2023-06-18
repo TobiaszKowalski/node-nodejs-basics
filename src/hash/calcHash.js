@@ -1,5 +1,5 @@
 import fs from 'fs';
-import {dirname, join} from "path";
+import { dirname, join } from "path";
 import crypto from 'crypto';
 
 const calculateHash = async () => {

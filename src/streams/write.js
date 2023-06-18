@@ -1,5 +1,5 @@
 import { createWriteStream } from "fs";
-import { dirname, join, resolve } from "path";
+import { dirname, join } from "path";
 
 const write = async () => {
   const __filename = new URL(import.meta.url).pathname;

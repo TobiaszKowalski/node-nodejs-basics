@@ -1,16 +1,21 @@
-const path = require('path');
-const { release, version } = require('os');
-const { createServer: createServerHttp } = require('http');
-require('./files/c');
+import path from 'path';
+import { readFileSync } from 'fs';
+import { release, version } from 'os';
+import { createServer as createServerHttp } from 'http';
+import './files/c.js';
 
 const random = Math.random();
+const __filename = new URL(import.meta.url).pathname;
+const __dirname = path.dirname(__filename);
 
-let unknownObject;
+let unknownObject, jsonString;
 
 if (random > 0.5) {
-    unknownObject = require('./files/a.json');
+  jsonString = readFileSync(path.join(__dirname, "files", "a.json"), 'utf-8');
+  unknownObject = JSON.parse(jsonString);
 } else {
-    unknownObject = require('./files/b.json');
+  jsonString = readFileSync(path.join(__dirname, "files", "b.json"), 'utf-8')
+  unknownObject = JSON.parse(jsonString);
 }
 
 console.log(`Release ${release()}`);
@@ -21,7 +26,7 @@ console.log(`Path to current file is ${__filename}`);
 console.log(`Path to current directory is ${__dirname}`);
 
 const myServer = createServerHttp((_, res) => {
-    res.end('Request accepted');
+  res.end('Request accepted');
 });
 
 const PORT = 3000;
@@ -33,8 +38,7 @@ myServer.listen(PORT, () => {
     console.log('To terminate it, use Ctrl+C combination');
 });
 
-module.exports = {
+export {
     unknownObject,
     myServer,
 };
-

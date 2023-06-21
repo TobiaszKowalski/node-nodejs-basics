@@ -1,9 +1,10 @@
 import fs from 'fs';
 import { dirname, join } from "path";
 import crypto from 'crypto';
+import { fileURLToPath } from 'url';
 
 const calculateHash = async () => {
-  const __filename = new URL(import.meta.url).pathname;
+  const __filename = fileURLToPath(import.meta.url);
   const __dirname = dirname(__filename);
   const filePath = join(__dirname, "files", "fileToCalculateHashFor.txt");
 

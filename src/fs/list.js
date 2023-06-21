@@ -1,8 +1,9 @@
 import { readdir } from "fs/promises";
 import { dirname, join } from "path";
+import { fileURLToPath } from 'url';
 
 const list = async () => {
-  const __filename = new URL(import.meta.url).pathname;
+  const __filename = fileURLToPath(import.meta.url);
   const __dirname = dirname(__filename);
   const filesPath = join(__dirname, "files");
   const fsFailedErrorMessage = "FS operation failed";

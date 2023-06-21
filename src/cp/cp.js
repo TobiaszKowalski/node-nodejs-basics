@@ -1,8 +1,9 @@
 import { spawn } from "child_process";
 import { dirname, join } from "path";
+import { fileURLToPath } from 'url';
 
 const spawnChildProcess = async (args) => {
-    const __filename = new URL(import.meta.url).pathname;
+    const __filename = fileURLToPath(import.meta.url);
     const __dirname = dirname(__filename);
     const pathToScript = join(__dirname, "files", "script.js");
 

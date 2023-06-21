@@ -1,9 +1,10 @@
 import { Worker } from "worker_threads";
 import { dirname, join } from "path";
 import { cpus } from "os";
+import { fileURLToPath } from 'url';
 
 const performCalculations = async () => {
-  const __filename = new URL(import.meta.url).pathname;
+  const __filename = fileURLToPath(import.meta.url);
   const __dirname = dirname(__filename);
   const pathToWorker = join(__dirname, "worker.js");
   const cpuCount = cpus().length;

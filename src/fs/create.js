@@ -1,8 +1,9 @@
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 const create = async () => {
-  const __filename = new URL(import.meta.url).pathname;
+  const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
   const filePath = path.join(__dirname, 'files', 'fresh.txt');
   const fileContent = "I am fresh and young";

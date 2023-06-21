@@ -2,10 +2,11 @@ import path from 'path';
 import { readFileSync } from 'fs';
 import { release, version } from 'os';
 import { createServer as createServerHttp } from 'http';
+import { fileURLToPath } from 'url';
 import './files/c.js';
 
 const random = Math.random();
-const __filename = new URL(import.meta.url).pathname;
+const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 let unknownObject, jsonString;

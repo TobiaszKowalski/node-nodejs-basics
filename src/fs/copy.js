@@ -1,8 +1,9 @@
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from 'url';
 
 const copy = async () => {
-  const __filename = new URL(import.meta.url).pathname;
+  const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
   const sourceFolder = path.join(__dirname, "files");
   const targetFolder = path.join(__dirname, "files_copy");

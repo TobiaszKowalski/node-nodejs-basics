@@ -1,6 +1,23 @@
+import { spawn } from "child_process";
+import { dirname, join } from "path";
+import { fileURLToPath } from 'url';
+
 const spawnChildProcess = async (args) => {
-    // Write your code here
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = dirname(__filename);
+    const pathToScript = join(__dirname, "files", "script.js");
+
+    return new Promise((resolve, reject) => {
+        const childProcess = spawn("node", [pathToScript, ...args], {
+            stdio: [ "pipe", "pipe", "inherit"]
+        })
+        process.stdin.pipe(childProcess.stdin);
+        childProcess.stdout.pipe(process.stdout);
+
+        childProcess.on("close", code => code === 0 ? resolve() : reject());
+        childProcess.on("error", reject);
+    })
 };
 
 // Put your arguments in function call to test this functionality
-spawnChildProcess( /* [someArgument1, someArgument2, ...] */);
+spawnChildProcess(["arg1", "arg2"]);
